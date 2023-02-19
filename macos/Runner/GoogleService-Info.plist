@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>789071528630-n9anujnehdvo2mig8jquld7uh43fhi2l.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.789071528630-n9anujnehdvo2mig8jquld7uh43fhi2l</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCa4V5q8tEJb-_mwq7Sp_T6i0n790rRSz8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>789071528630</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.ezBank</string>
+	<key>PROJECT_ID</key>
+	<string>ez-bank-d74ab</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ez-bank-d74ab.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:789071528630:ios:7a3106c2a9287c7dac5c17</string>
+</dict>
+</plist>

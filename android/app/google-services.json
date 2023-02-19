@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "789071528630",
+    "project_id": "ez-bank-d74ab",
+    "storage_bucket": "ez-bank-d74ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789071528630:android:3c4e05d15ee062a4ac5c17",
+        "android_client_info": {
+          "package_name": "com.example.ez_bank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789071528630-fk2bsk11bod9jde1io08ju2ra6c1qa0t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_-neGt366UIYPqR2AyHBV-QCqMR2OpmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789071528630-fk2bsk11bod9jde1io08ju2ra6c1qa0t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

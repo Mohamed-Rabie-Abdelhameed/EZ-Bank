@@ -35,17 +35,24 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  line_icons: ^2.0.1
+  curved_navigation_bar: ^1.0.3
+  firebase_core: ^2.6.1
+  firebase_auth: ^4.2.8
+  get: ^4.6.5
+  cloud_firestore: ^4.4.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.11.0
-
+  http: ^0.13.5
+  
 
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/icon.png"
+  image_path: "assets/images/logo.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -72,6 +79,7 @@ flutter:
     - assets/images/welcome_screen.jpg
     - assets/images/logo.png
     - assets/images/logo_text.png
+    - assets/images/cards.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

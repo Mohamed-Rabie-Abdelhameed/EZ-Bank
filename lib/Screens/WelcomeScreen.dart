@@ -5,43 +5,54 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      body: Container(
-        constraints: BoxConstraints.expand(),
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 255, 210, 63),
-          image: DecorationImage(
-            image: AssetImage('assets/images/welcome_screen.jpg'),
-            fit: BoxFit.fitWidth,
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 255, 210, 63),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Image.asset(
+              'assets/images/logo_text.png',
+              height: 120,
+              width: 120,
+            ),
           ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: Image.asset(
-                'assets/images/logo_text.png',
-                height: 100,
-                width: 100,
+          Image.asset(
+            'assets/images/cards.png',
+            height: MediaQuery.of(context).size.height * 0.49,
+            width: MediaQuery.of(context).size.width,
+            alignment: Alignment.centerRight,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0, top: 20.0),
+            child: Text(
+              'A Life Full of\nSimplicity.',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.75, bottom: 70.0),
-              child: IconButton(
-                icon: Icon(Icons.arrow_circle_right,
-                    color: Colors.black, size: 60.0),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 20.0, right: 15),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: CircleBorder(), shadowColor: Colors.transparent),
+                child: Icon(Icons.arrow_circle_right,
+                    color: Colors.black, size: 70.0),
                 onPressed: () {
                   Navigator.pushNamed(context, '/login');
                 },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    ));
+    );
   }
 }
