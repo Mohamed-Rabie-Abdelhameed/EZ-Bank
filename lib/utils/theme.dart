@@ -28,14 +28,16 @@ class AppTheme {
         selectionColor: Colors.black,
         selectionHandleColor: Colors.black,
       ),
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: Color(0xFFF6F8F7),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         foregroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.black),
-        
-      ));
+      ),
+      cardColor: Color.fromARGB(255, 11, 129, 101),
+      textTheme: TextTheme(bodyText1: TextStyle(color: Colors.green[100])),
+      primaryColorDark: Color.fromARGB(255, 135, 26, 60));
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
@@ -69,5 +71,7 @@ class AppTheme {
       foregroundColor: Colors.white,
       iconTheme: IconThemeData(color: Colors.white),
     ),
+    cardColor: Color(0xFFffb94a),
+    textTheme: TextTheme(bodyText1: TextStyle(color: Colors.yellow[100]))
   );
 }

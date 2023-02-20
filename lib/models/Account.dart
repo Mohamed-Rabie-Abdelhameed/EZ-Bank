@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Account {
   final String? id;
   final String name;
@@ -8,8 +10,7 @@ class Account {
   final int accountNumber;
 
   Account(
-      {
-      this.id,
+      {this.id,
       required this.name,
       required this.email,
       required this.password,
@@ -17,15 +18,27 @@ class Account {
       this.balance = 0,
       required this.accountNumber});
 
-      toJson() {
-        return {
-          'name': name,
-          'email': email,
-          'dob': dob,
-          'balance': balance,
-          'accountNumber': accountNumber,
-        };
-      }
+  toJson() {
+    return {
+      'name': name,
+      'email': email,
+      'dob': dob,
+      'balance': balance,
+      'accountNumber': accountNumber,
+      'password': password
+    };
+  }
+
+  factory Account.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    final data = snapshot.data()!;
+    return Account(
+        id: snapshot.id,
+        name: data['name'],
+        email: data['email'],
+        dob: data['dob'].toDate(),
+        balance: data['balance'].toDouble(),
+        accountNumber: data['accountNumber'],
+        password: data['password']);
+  }
 }
-
-

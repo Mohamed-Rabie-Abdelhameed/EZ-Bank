@@ -1,5 +1,5 @@
 import 'package:ez_bank/firebase_options.dart';
-import 'package:ez_bank/pages/Profile.dart';
+import 'package:ez_bank/screens/Profile.dart';
 import 'package:ez_bank/repository/authRepository.dart';
 import 'package:ez_bank/screens/AboutScreen.dart';
 import 'package:ez_bank/screens/BillingScreen.dart';

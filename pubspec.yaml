@@ -80,6 +80,10 @@ flutter:
     - assets/images/logo.png
     - assets/images/logo_text.png
     - assets/images/cards.png
+    - assets/images/man.png
+    - assets/images/chip.png
+
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,8 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../screens/HomeScreen.dart';
-import '../screens/LoginScreen.dart';
 import '../screens/WelcomeScreen.dart';
 
 class AuthRepository extends GetxController {
@@ -26,26 +26,27 @@ class AuthRepository extends GetxController {
         : Get.offAll(() => HomeScreen());
   }
 
+ 
+
   Future<void> createUserWithEmailAndPassword(
       String email, String password) async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      firebaseUser.value != null
-          ? Get.offAll(() => HomeScreen())
-          : Get.to(WelcomeScreen());
-    } on FirebaseAuthException catch (e) {
-      print(e);
-      print(e.code);
-      Get.snackbar(
-        "Error",
-        "Couldn't sign up, please try again",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.1),
-        colorText: Colors.red,
-      );
-      Get.snackbar('Error', "Couldn't sign up, please try again");
-    }
+      try {
+        await _auth.createUserWithEmailAndPassword(
+            email: email, password: password);
+        firebaseUser.value != null
+            ? Get.offAll(() => HomeScreen())
+            : Get.to(WelcomeScreen());
+      } on FirebaseAuthException catch (e) {
+        print(e);
+        print(e.code);
+        Get.snackbar(
+          "Error",
+          "Couldn't sign up, please try again",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.withOpacity(0.1),
+          colorText: Colors.red,
+        );
+      }
   }
 
   Future<void> loginWithEmailAndPassword(String email, String password) async {
