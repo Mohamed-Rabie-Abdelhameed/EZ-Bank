@@ -14,7 +14,7 @@ class WelcomeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Image.asset(
-              'assets/images/logo_text.png',
+              'assets/images/logo_text_black.png',
               height: 120,
               width: 120,
             ),
@@ -42,7 +42,9 @@ class WelcomeScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 20.0, right: 15),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(), shadowColor: Colors.transparent),
+                    shape: CircleBorder(),
+                    shadowColor: Colors.transparent,
+                    backgroundColor: Colors.transparent),
                 child: Icon(Icons.arrow_circle_right,
                     color: Colors.black, size: 70.0),
                 onPressed: () {

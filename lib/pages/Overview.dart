@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ez_bank/widgets/TransactionCard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../controllers/profileController.dart';
 import '../models/Account.dart';
 
@@ -161,19 +163,63 @@ class _OverviewState extends State<Overview> {
                           ),
                         ],
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Recent Transactions",
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold)),
+                        )),
+                    Container(
+                      height: 300,
+                      child: userData.transactions == null
+                          ? Center(
+                              child: SpinKitThreeInOut(
+                                color: Theme.of(context).primaryColor,
+                                size: 50.0,
+                              ),
+                            )
+                          : ListView.builder(
+                              itemCount: userData.transactions!.length <5?userData.transactions!.length:5,
+                              itemBuilder: (context, index) {
+                                return TransactionCard(
+                                  accountNumber: userData.transactions![index]
+                                      ['account_number'],
+                                  accountName: userData.transactions![index]
+                                      ['account_name'],
+                                  amount: userData.transactions![index]
+                                          ['amount'] *
+                                      1.0,
+                                  date: userData.transactions![index]['date']
+                                      .toDate(),
+                                );
+                              },
+                            ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
                   ],
                 ),
               );
             } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return Center(
+                  child: SpinKitThreeInOut(
+                color: Theme.of(context).primaryColor,
+                size: 50.0,
+              ));
             }
           } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return Center(
+                child: SpinKitThreeInOut(
+              color: Theme.of(context).primaryColor,
+              size: 50.0,
+            ));
           }
         },
       ),

@@ -2,7 +2,7 @@ import 'package:ez_bank/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../controllers/profileController.dart';
 import '../models/Account.dart';
 
@@ -12,7 +12,7 @@ class UpdateProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final profileController = Get.put(ProfileController());
-  
+    final _formKey = GlobalKey<FormState>();
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -33,6 +33,13 @@ class UpdateProfileScreen extends StatelessWidget {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasData) {
                       Account userData = snapshot.data as Account;
+
+                      // controllers
+                      final email = TextEditingController(text: userData.email);
+                      final name = TextEditingController(text: userData.name);
+                      final password =
+                          TextEditingController(text: userData.password);
+
                       return Column(children: [
                         Stack(children: [
                           SizedBox(
@@ -70,68 +77,116 @@ class UpdateProfileScreen extends StatelessWidget {
                           height: 35,
                         ),
                         Form(
+                            key: _formKey,
                             child: Column(
-                          children: [
-                            TextFormField(
-                              initialValue: userData.name,
-                              decoration: InputDecoration(
-                                  labelText: "Name",
-                                  hintText: "Enter your name",
-                                  prefixIcon: Icon(LineIcons.user),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  )),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            TextFormField(
-                              initialValue: userData.email,
-                              decoration: InputDecoration(
-                                  labelText: "Email",
-                                  hintText: "Enter your email",
-                                  prefixIcon: Icon(LineIcons.envelope),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  )),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            TextFormField(
-                              initialValue: userData.password,
-                              decoration: InputDecoration(
-                                  labelText: "Password",
-                                  hintText: "Enter the new password",
-                                  prefixIcon: Icon(LineIcons.lock),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  )),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 50,
-                              child: OutlinedButton(
-                                onPressed: () {},
-                                child: Text("Update",
-                                    style: TextStyle(fontSize: 20)),
-                                style: OutlinedButton.styleFrom(
-                                    backgroundColor:
-                                        themeManager.themeMode == ThemeMode.dark
-                                            ? Color(0xFFFFD23F)
-                                            : Color(0xFF5EBC66),
-                                    shape: StadiumBorder()),
-                              ),
-                            ),
-                          ],
-                        ))
+                              children: [
+                                TextFormField(
+                                  validator: (value) {
+                                    if (value == null ||
+                                        value.isEmpty ||
+                                        value.length < 10 ||
+                                        !RegExp(r'^[a-zA-Z ]+$')
+                                            .hasMatch(value)) {
+                                      return 'Please enter your full name';
+                                    }
+                                    return null;
+                                  },
+                                  controller: name,
+                                  decoration: InputDecoration(
+                                      labelText: "Name",
+                                      hintText: "Enter your name",
+                                      prefixIcon: Icon(LineIcons.user),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      )),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                TextFormField(
+                                  validator: (value) {
+                                    if (value == null ||
+                                        value.isEmpty ||
+                                        !RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)')
+                                            .hasMatch(value)) {
+                                      return 'Please enter a valid email address';
+                                    }
+                                    return null;
+                                  },
+                                  controller: email,
+                                  decoration: InputDecoration(
+                                      labelText: "Email",
+                                      hintText: "Enter your email",
+                                      prefixIcon: Icon(LineIcons.envelope),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      )),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                TextFormField(
+                                  validator: (value) {
+                                    if (value == null ||
+                                        value.isEmpty ||
+                                        value.length < 5 ||
+                                        value.contains(' ')) {
+                                      return 'Password must be at least 5 characters long and cannot contain spaces';
+                                    }
+                                    return null;
+                                  },
+                                  controller: password,
+                                  decoration: InputDecoration(
+                                      labelText: "Password",
+                                      hintText: "Enter the new password",
+                                      prefixIcon: Icon(LineIcons.lock),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      )),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                SizedBox(
+                                  width: double.infinity,
+                                  height: 50,
+                                  child: OutlinedButton(
+                                    onPressed: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        final userUpdated = Account(
+                                          id: userData.id,
+                                          name: name.text,
+                                          email: email.text.trim(),
+                                          password: password.text,
+                                          balance: userData.balance,
+                                          accountNumber: userData.accountNumber,
+                                          dob: userData.dob,
+                                        );
+                                        await profileController
+                                            .updateProfile(userUpdated);
+                                      }
+                                    },
+                                    child: Text("Update",
+                                        style: TextStyle(fontSize: 20)),
+                                    style: OutlinedButton.styleFrom(
+                                        backgroundColor:
+                                            themeManager.themeMode ==
+                                                    ThemeMode.dark
+                                                ? Color(0xFFFFD23F)
+                                                : Color(0xFF5EBC66),
+                                        shape: StadiumBorder()),
+                                  ),
+                                ),
+                              ],
+                            ))
                       ]);
                     }
                   } else {
-                    return Center(child: CircularProgressIndicator());
+                    return Center(
+                        child: SpinKitThreeInOut(
+                      color: Theme.of(context).primaryColor,
+                      size: 50.0,
+                    ));
                   }
                   return Center(child: Text("Something went wrong"));
                 },

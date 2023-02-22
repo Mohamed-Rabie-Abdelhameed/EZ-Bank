@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import '../controllers/profileController.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../main.dart';
 import '../models/Account.dart';
 import '../repository/authRepository.dart';
@@ -155,7 +156,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ]);
                       }
                     } else {
-                      return const Center(child: CircularProgressIndicator());
+                      return Center(
+                child: SpinKitThreeInOut(
+                  color: Theme.of(context).primaryColor,
+                  size: 50.0,
+                )
+              );
                     }
                     return const Center(child: Text("No Data"));
                   },

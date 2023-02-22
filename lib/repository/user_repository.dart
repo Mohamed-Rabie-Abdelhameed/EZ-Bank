@@ -70,10 +70,59 @@ class UserRepository extends GetxController {
       print(e.toString());
     }
     return Account(
+        id: "",
         name: "",
         email: "",
         password: "",
         dob: DateTime.now(),
-        accountNumber: 0);
+        accountNumber: 0,);
+  }
+
+  Future<void> updateUser(Account account) async {
+    try {
+      await _db
+          .collection('Users')
+          .doc(account.id)
+          .update(account.toJson())
+          .whenComplete(() => Get.snackbar(
+                "Success",
+                "Your account has been updated.",
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.green.withOpacity(0.1),
+                colorText: Colors.green,
+              ));
+    } catch (e) {
+      print(e);
+      Get.snackbar(
+        "Error",
+        "Something went wrong. Please try again later.",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.1),
+        colorText: Colors.red,
+      );
+      print(e.toString());
+    }
+  }
+
+  Future<void> updateBalance(double amount, String id) async {
+    try {
+      await _db.collection('Users').doc(id).update({'balance': amount}).whenComplete(() => Get.snackbar(
+                "Success",
+                "Transaction successful.",
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.green.withOpacity(0.1),
+                colorText: Colors.green,
+              ));
+    } catch (e) {
+      print(e);
+      Get.snackbar(
+        "Error",
+        "Something went wrong. Please try again later.",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.1),
+        colorText: Colors.red,
+      );
+      print(e.toString());
+    }
   }
 }

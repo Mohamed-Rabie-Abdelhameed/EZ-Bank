@@ -73,13 +73,13 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: CurvedNavigationBar(
         items: const [
           Icon(LineIcons.home),
-          Icon(Icons.arrow_outward),
+          Icon(LineIcons.wallet),
           Icon(LineIcons.coins),
           Icon(LineIcons.paperPlane),
           Icon(LineIcons.euroSign),
         ],
         color: Theme.of(context).primaryColor.withOpacity(0.7),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Colors.transparent,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 500),
         height: 60,
