@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Icon(LineIcons.euroSign),
         ],
         color: Theme.of(context).primaryColor.withOpacity(0.7),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 500),
         height: 60,

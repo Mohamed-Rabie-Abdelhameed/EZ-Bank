@@ -6,6 +6,7 @@ import 'package:ez_bank/screens/BillingScreen.dart';
 import 'package:ez_bank/screens/EditProfileScreen.dart';
 import 'package:ez_bank/screens/HelpScreen.dart';
 import 'package:ez_bank/screens/SettingsScreen.dart';
+import 'package:ez_bank/screens/TransactionsScreen.dart';
 import 'package:ez_bank/utils/theme.dart';
 import 'package:ez_bank/utils/theme_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -69,6 +70,7 @@ class _AppState extends State<App> {
         '/billing': (context) => BillingScreen(),
         '/settings': (context) => SettingsScreen(),
         '/edit': (context) => UpdateProfileScreen(),
+        '/transactions': (context) => TransactionsScreen(),
       },
       title: 'EZ Bank',
       theme: AppTheme.lightTheme,

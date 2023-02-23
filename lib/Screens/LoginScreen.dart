@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             backgroundBlendMode:
-                Theme.of(context).scaffoldBackgroundColor == Colors.white
+                Theme.of(context).brightness == Brightness.light
                     ? BlendMode.darken
                     : BlendMode.lighten,
             gradient: LinearGradient(
@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
               end: Alignment.center,
               colors: [
                 Theme.of(context).primaryColor,
-                Theme.of(context).scaffoldBackgroundColor == Colors.white
+                Theme.of(context).brightness == Brightness.light
                     ? Colors.white
                     : Colors.black,
               ],
@@ -123,9 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           LoginController.instance.login(
                               controller.email.text.trim(),
                               controller.password.text.trim());
-                        } catch (e) {
-                          
-                        }
+                        } catch (e) {}
                       }
                     },
                     child: SizedBox(

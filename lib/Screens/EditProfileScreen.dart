@@ -161,6 +161,7 @@ class UpdateProfileScreen extends StatelessWidget {
                                           balance: userData.balance,
                                           accountNumber: userData.accountNumber,
                                           dob: userData.dob,
+                                          transactions: userData.transactions,
                                         );
                                         await profileController
                                             .updateProfile(userUpdated);

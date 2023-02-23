@@ -1,6 +1,7 @@
 import 'package:ez_bank/controllers/profileController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../models/Account.dart';
 
@@ -211,10 +212,20 @@ class _DepositState extends State<Deposit> {
                     ],
                   );
                 } else {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(
+                    child: SpinKitThreeInOut(
+                      color: Theme.of(context).primaryColor,
+                      size: 50.0,
+                    ),
+                  );
                 }
               }
-              return Center(child: CircularProgressIndicator());
+              return Center(
+                child: SpinKitThreeInOut(
+                  color: Theme.of(context).primaryColor,
+                  size: 50.0,
+                ),
+              );
             },
           ),
         ),

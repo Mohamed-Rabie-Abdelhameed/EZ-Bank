@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ez_bank/models/Transaction.dart';
 
 class Account {
   final String id;
@@ -10,17 +11,17 @@ class Account {
   final DateTime dob;
   final double balance;
   final int accountNumber;
-  final List? transactions;
+  final List<TransactionModel> transactions;
 
   Account(
-      {this.id="",
+      {this.id = "",
       required this.name,
       required this.email,
       required this.password,
       required this.dob,
       this.balance = 0,
       required this.accountNumber,
-       this.transactions});
+      this.transactions = const []});
 
   toJson() {
     return {
@@ -37,13 +38,13 @@ class Account {
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final data = snapshot.data()!;
     return Account(
-        id: snapshot.id,
-        name: data['name'],
-        email: data['email'],
-        dob: data['dob'].toDate(),
-        balance: data['balance'].toDouble(),
-        accountNumber: data['accountNumber'],
-        password: data['password'],
-        transactions: data['transactions']);
+      id: snapshot.id,
+      name: data['name'],
+      email: data['email'],
+      dob: data['dob'].toDate(),
+      balance: data['balance'].toDouble(),
+      accountNumber: data['accountNumber'],
+      password: data['password'],
+    );
   }
 }

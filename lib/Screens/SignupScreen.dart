@@ -24,7 +24,7 @@ class _SignupScreenState extends State<SignupScreen> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             backgroundBlendMode:
-                Theme.of(context).scaffoldBackgroundColor == Colors.white
+                Theme.of(context).brightness == Brightness.light
                     ? BlendMode.darken
                     : BlendMode.lighten,
             gradient: LinearGradient(
@@ -32,7 +32,7 @@ class _SignupScreenState extends State<SignupScreen> {
               end: Alignment.center,
               colors: [
                 Theme.of(context).primaryColor,
-                Theme.of(context).scaffoldBackgroundColor == Colors.white
+                Theme.of(context).brightness == Brightness.light
                     ? Colors.white
                     : Colors.black,
               ],
@@ -54,7 +54,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   padding: const EdgeInsets.only(bottom: 20.0),
                   child: Text(
                     'Signup',
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
@@ -74,7 +75,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     validator: (value) {
                       if (value == null ||
-                          value.isEmpty ||
+                          value.isEmpty || !value.contains(' ')||
                           value.length < 10 ||
                           !RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
                         return 'Please enter your full name';
@@ -84,8 +85,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 15, left: 25.0, right: 25),
+                  padding: const EdgeInsets.only(
+                      bottom: 15, left: 25.0, right: 25),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -100,8 +101,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           initialDate: birthDate,
                           firstDate: DateTime.now()
                               .subtract(Duration(days: 365 * 100)),
-                          lastDate:
-                              DateTime.now().subtract(Duration(days: 365 * 18)),
+                          lastDate: DateTime.now()
+                              .subtract(Duration(days: 365 * 18)),
                         );
                         if (newDate != null) {
                           setState(() {
@@ -215,12 +216,12 @@ class _SignupScreenState extends State<SignupScreen> {
                         final Account account = Account(
                           name: controller.name.text,
                           dob: birthDate,
-                          accountNumber: int.parse(controller.accountNumber.text.trim()),
+                          accountNumber:
+                              int.parse(controller.accountNumber.text.trim()),
                           email: controller.email.text.trim(),
                           password: controller.password.text.trim(),
                         );
-                        SignupController.instance.registerUser( account );
-                            
+                        SignupController.instance.registerUser(account);
                       }
                     },
                     child: SizedBox(
@@ -231,7 +232,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      shape:
+                          MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),

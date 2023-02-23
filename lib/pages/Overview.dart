@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../controllers/profileController.dart';
 import '../models/Account.dart';
+import '../models/Transaction.dart';
 
 class Overview extends StatefulWidget {
   const Overview({super.key});
@@ -14,16 +15,32 @@ class Overview extends StatefulWidget {
 }
 
 class _OverviewState extends State<Overview> {
+  late Future userFuture;
+  @override
+  void initState() {
+    super.initState();
+    userFuture = _getData();
+  }
+
+  _getData() async {
+    final profileController = Get.put(ProfileController());
+    Account userData = await profileController.getUserData();
+    List<TransactionModel>? transactions =
+        await profileController.getTransactions();
+    print(userData.email);
+    return [userData, transactions];
+  }
+
   @override
   Widget build(BuildContext context) {
-    final profileController = Get.put(ProfileController());
     return SingleChildScrollView(
       child: FutureBuilder(
-        future: profileController.getUserData(),
+        future: userFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
-              Account userData = snapshot.data as Account;
+              Account userData = snapshot.data[0] as Account;
+              List<TransactionModel>? transactions = snapshot.data[1];
               return Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -177,26 +194,25 @@ class _OverviewState extends State<Overview> {
                         )),
                     Container(
                       height: 300,
-                      child: userData.transactions == null
+                      child: transactions == null
                           ? Center(
-                              child: SpinKitThreeInOut(
-                                color: Theme.of(context).primaryColor,
-                                size: 50.0,
-                              ),
+                              child: Text("No Data",
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold)),
                             )
                           : ListView.builder(
-                              itemCount: userData.transactions!.length <5?userData.transactions!.length:5,
+                              shrinkWrap: true,
+                              itemCount: transactions.length < 3
+                                  ? transactions.length
+                                  : 3,
                               itemBuilder: (context, index) {
                                 return TransactionCard(
-                                  accountNumber: userData.transactions![index]
-                                      ['account_number'],
-                                  accountName: userData.transactions![index]
-                                      ['account_name'],
-                                  amount: userData.transactions![index]
-                                          ['amount'] *
-                                      1.0,
-                                  date: userData.transactions![index]['date']
-                                      .toDate(),
+                                  accountNumber:
+                                      transactions[index].accountNumber,
+                                  accountName: transactions[index].title,
+                                  amount: transactions[index].amount * 1.0,
+                                  date: transactions[index].date,
                                 );
                               },
                             ),
